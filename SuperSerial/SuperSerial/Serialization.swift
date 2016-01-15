@@ -8,10 +8,38 @@
 
 import Foundation
 
-public enum Serialized {
+public enum Serialized: CustomStringConvertible {
     indirect case Dict([String:Serialized])
     indirect case Array([Serialized])
     case Str(String)
+    
+    public func toString() -> String {
+        switch self {
+        case .Dict(let dict):
+            var string = "{"
+            for (key, value) in dict {
+                string += "\(key): \(value.toString()),"
+            }
+            string.removeAtIndex(string.endIndex.predecessor())
+            string += "}"
+            return string
+        case .Array(let array):
+            let arrayString = array.reduce("[", combine: { (last, obj) -> String in
+                if (last as NSString).length == 1 {
+                    return "\(last)\(obj.toString())"
+                } else {
+                    return "\(last), \(obj.toString())"
+                }
+            })
+            return "\(arrayString)]"
+        case .Str(let string):
+            return string
+        }
+    }
+    
+    public var description:String {
+        return self.toString()
+    }
 }
 
 public protocol Serializable {
