@@ -9,7 +9,7 @@
 import Foundation
 
 /**
- Adds based serialization to String
+ Adds basic serialization to String
  */
 extension String:Serializable {
     public static func fromSerialized(serialized: Serialized) -> String? {
