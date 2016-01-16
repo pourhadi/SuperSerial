@@ -10,6 +10,8 @@
 		449EF33E1C49460700600D0F /* SuperSerial.h in Headers */ = {isa = PBXBuildFile; fileRef = 449EF33D1C49460700600D0F /* SuperSerial.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		449EF3461C49462A00600D0F /* Serialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449EF3451C49462A00600D0F /* Serialization.swift */; };
 		449EF3481C49466800600D0F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 449EF3471C49466800600D0F /* Extensions.swift */; };
+		449EF34A1C4A283000600D0F /* Serialization.swift in Headers */ = {isa = PBXBuildFile; fileRef = 449EF3451C49462A00600D0F /* Serialization.swift */; settings = {ATTRIBUTES = (Public, ); }; };
+		449EF34B1C4A283100600D0F /* Extensions.swift in Headers */ = {isa = PBXBuildFile; fileRef = 449EF3471C49466800600D0F /* Extensions.swift */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +68,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				449EF33E1C49460700600D0F /* SuperSerial.h in Headers */,
+				449EF34B1C4A283100600D0F /* Extensions.swift in Headers */,
+				449EF34A1C4A283000600D0F /* Serialization.swift in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,6 +291,7 @@
 				449EF3441C49460700600D0F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
