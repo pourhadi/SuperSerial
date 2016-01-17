@@ -9,72 +9,86 @@
 import Foundation
 
 /**
- Adds based serialization to String
+ Adds basic serialization to String
  */
 extension String:Serializable {
-    public static func fromSerialized(serialized: Serialized) -> String? {
-        switch serialized {
-        case .Str(let string): return string
+    public init?(fromSerialized: Serialized) {
+        switch fromSerialized {
+        case .Str(let string):
+            self = string
         default: return nil
         }
     }
-    
-    public func serialize() -> Serialized {
+
+    public func ss_serialize() -> Serialized {
         return Serialized.Str(self)
     }
 }
 
-extension Array where Element: Serializable {
-    /**
-     Adds serialization to Swift arrays of elements that conform to Serializable.
-     
-     ```
-     var strings = ["one", "two", "three"]
-     var serialized = strings.serialize()
-     ```
-     
-     */
-    public func serialize() -> Serialized {
-        return Serialized.Array(self.map { $0.serialize() } )
-    }
-    
-    /**
-     Deserializes a Serialized.Array to its Serializable Element.
-     */
-    public static func fromSerialized(serialized:Serialized) -> [Element]? {
-        switch serialized {
-        case .Array(let array):
-            return array.map({ (e) -> Element in
-                return Element.fromSerialized(e)!
-            })
-        default: return nil
-        }
-    }
-}
-
 extension CollectionType where Generator.Element == Serialized {
-    public static func fromSerialized(serialized:Serialized) -> [Serialized]? {
-        switch serialized {
-        case .Array(let array):
-            return array
-        default: return nil
-        }
-    }
-    
-    public func serialize() -> Serialized {
-        return Serialized.Array(self as! [Serialized])
+    public func toString() -> String {
+        let string = self.reduce("[", combine: { (last, obj) -> String in
+            if (last as NSString).length == 1 {
+                return "\(last)\(obj.toString())"
+            } else {
+                return "\(last),\(obj.toString())"
+            }
+        })
+        return "\(string)]"
     }
 }
 
-extension CGPoint:Serializable {
-    public static func fromSerialized(serialized: Serialized) -> CGPoint? {
-        switch serialized {
-        case .Str(let string): return CGPointFromString(string)
+extension Dictionary:Deserializable {}
+extension Array:Deserializable {}
+
+extension CGPoint:AutoSerializable {
+    public init!(withValuesForKeys: [String : Serializable]) {
+        var x:Float = 0.0
+        var y:Float = 0.0
+        if let xVal = withValuesForKeys["x"] as? Float {
+            x = xVal
+        }
+        if let yVal = withValuesForKeys["y"] as? Float {
+            y = yVal
+        }
+        self.x = CGFloat(x)
+        self.y = CGFloat(y)
+    }
+}
+
+public protocol SerializableInt:IntegerType, Serializable, Deserializable {}
+extension SerializableInt {
+    public func ss_serialize() -> Serialized {
+        return Serialized.Integer(self)
+    }
+    
+    public init?(fromSerialized:Serialized) {
+        switch fromSerialized {
+        case .Integer(let int):
+            self = int as! Self
         default: return nil
         }
     }
+}
+
+public protocol SerializableFloat:FloatingPointType, Serializable, Deserializable {}
+extension SerializableFloat {
+    public func ss_serialize() -> Serialized {
+        return Serialized.FloatingPoint(self)
+    }
     
-    public func serialize() -> Serialized {
-        return Serialized.Str(NSStringFromCGPoint(self) as String)
+    public init?(fromSerialized:Serialized) {
+        switch fromSerialized {
+        case .FloatingPoint(let float):
+            self = float as! Self
+        default: return nil
+        }
     }
 }
+
+extension Int: SerializableInt {}
+extension UInt:SerializableInt {}
+
+extension Float:SerializableFloat {}
+extension Double:SerializableFloat {}
+extension CGFloat:SerializableFloat {}
