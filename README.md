@@ -3,7 +3,7 @@ Serialization for Swift &amp; value types
 
 SuperSerial uses Mirroring in Swift to automatically infer a Struct's stored variables, allowing for easy serialization by conforming to the Serializable protocol. Conforming that Struct to AutoSerializable allows for easy deserialization as well.
 
-Supports custom serialization as well.
+Also supports custom serialization.
 
 Example usage:
 
