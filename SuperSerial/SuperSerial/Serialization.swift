@@ -43,17 +43,17 @@ public enum Serialized: CustomStringConvertible {
         var string = "{\"ss_case\": \"\(self.caseAsString())\", \"ss_value\": "
         switch self {
         case .Struct(let name, let data):
-            string += "{\n\"ss_typeName\": \"\(name)\",\n\"ss_data\":\n"
+            string += "{\"ss_typeName\": \"\(name)\",\"ss_data\":"
             string += data.toString()
-            string += "\n}"
+            string += "}"
             break
         case .Dict(let dict):
             string += "{"
             for (key, value) in dict {
-                string += "\n\"\(key)\": \(value.toString()),"
+                string += "\"\(key)\": \(value.toString()),"
             }
             string.removeAtIndex(string.endIndex.predecessor())
-            string += "\n}"
+            string += "}"
             break
         case .Array(let array):
             string += array.toString()
@@ -69,7 +69,7 @@ public enum Serialized: CustomStringConvertible {
             break
         }
         
-        return string + "\n}"
+        return string + "}"
     }
     
     private enum Case:String {
@@ -253,7 +253,6 @@ extension Serialized {
                 return (initd!, type)
             }
             return nil
-        default: return nil
         }
     }
 }
