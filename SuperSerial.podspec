@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "SuperSerial"
-  s.version          = "0.1.1"
+  s.version          = "0.1.2"
   s.summary          = "Serialization for Swift value types."
 
 # This description is used to generate tags and improve search results.
@@ -16,8 +16,7 @@ Pod::Spec.new do |s|
 #   * Try to keep it short, snappy and to the point.
 #   * Write the description between the DESC delimiters below.
 #   * Finally, don't worry about the indent, CocoaPods strips it!  
-s.description      = <<-DESC Serialization for Swift value types.
-DESC
+s.description      = "Serialization for Swift value types (structs in particular) and objects."
 
   s.homepage         = "https://github.com/pourhadi/SuperSerial"
   s.license          = 'MIT'
