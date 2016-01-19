@@ -12,6 +12,10 @@
 		2FE7FAE9462DB2997BBCEC68CF84C217 /* SuperSerial-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D886F7F7F1E8B1538CB97894094D5BC /* SuperSerial-dummy.m */; };
 		44193EBA1C4E15CD00EA7C20 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44193EB81C4E15CD00EA7C20 /* Extensions.swift */; };
 		44193EBB1C4E15CD00EA7C20 /* Serialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44193EB91C4E15CD00EA7C20 /* Serialization.swift */; };
+		44193EBC1C4E180A00EA7C20 /* Serialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44193EB91C4E15CD00EA7C20 /* Serialization.swift */; };
+		44193EBD1C4E180D00EA7C20 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44193EB81C4E15CD00EA7C20 /* Extensions.swift */; };
+		44193EBE1C4E182500EA7C20 /* Extensions.swift in Headers */ = {isa = PBXBuildFile; fileRef = 44193EB81C4E15CD00EA7C20 /* Extensions.swift */; settings = {ATTRIBUTES = (Public, ); }; };
+		44193EBF1C4E182500EA7C20 /* Serialization.swift in Headers */ = {isa = PBXBuildFile; fileRef = 44193EB91C4E15CD00EA7C20 /* Serialization.swift */; settings = {ATTRIBUTES = (Public, ); }; };
 		468DDFC426C8C7BCC406A30EBA4C1A47 /* SuperSerial-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E39C40EFD3044AFECBFA0830B2861DAC /* SuperSerial-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7A3AB9D0E2A4ECEEC8DB2077FDD05A28 /* SuperSerial.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9A82DE402C528B910F87144ABC337B72 /* SuperSerial.bundle */; };
 		9B6A6A5E317083D224B8862A22E6C5B3 /* Pods-SuperSerial_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 791D4AA6AC687F05AAD577B802382635 /* Pods-SuperSerial_Tests-dummy.m */; };
@@ -208,6 +212,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				468DDFC426C8C7BCC406A30EBA4C1A47 /* SuperSerial-umbrella.h in Headers */,
+				44193EBE1C4E182500EA7C20 /* Extensions.swift in Headers */,
+				44193EBF1C4E182500EA7C20 /* Serialization.swift in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,6 +350,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44193EBC1C4E180A00EA7C20 /* Serialization.swift in Sources */,
+				44193EBD1C4E180D00EA7C20 /* Extensions.swift in Sources */,
 				2FE7FAE9462DB2997BBCEC68CF84C217 /* SuperSerial-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
