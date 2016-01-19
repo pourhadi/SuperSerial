@@ -22,7 +22,7 @@ pod "SuperSerial"
 
 ## Author
 
-Daniel Pourhadi, dan.p@akta.com
+Daniel Pourhadi, dan@pourhadi.com
 
 ## License
 
