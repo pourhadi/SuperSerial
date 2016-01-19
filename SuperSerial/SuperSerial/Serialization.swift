@@ -32,7 +32,7 @@ public class SuperSerial {
 }
 
 public enum Serialized: CustomStringConvertible {
-    indirect case Struct(typeName:String, data:Serialized)
+    indirect case CustomType(typeName:String, data:Serialized)
     indirect case Dict([String:Serialized])
     indirect case Array([Serialized])
     case Str(String)
@@ -42,7 +42,7 @@ public enum Serialized: CustomStringConvertible {
     public func toString() -> String {
         var string = "{\"ss_case\": \"\(self.caseAsString())\", \"ss_value\": "
         switch self {
-        case .Struct(let name, let data):
+        case .CustomType(let name, let data):
             string += "{\"ss_typeName\": \"\(name)\",\"ss_data\":"
             string += data.toString()
             string += "}"
@@ -73,7 +73,7 @@ public enum Serialized: CustomStringConvertible {
     }
     
     private enum Case:String {
-        case Struct = "struct"
+        case CustomType = "type"
         case Dict = "dict"
         case Array = "array"
         case Str = "string"
@@ -83,7 +83,7 @@ public enum Serialized: CustomStringConvertible {
     
     private func caseAsString() -> String {
         switch self {
-        case .Struct: return Case.Struct.rawValue
+        case .CustomType: return Case.CustomType.rawValue
         case .Dict: return Case.Dict.rawValue
         case .Array: return Case.Array.rawValue
         case .Str: return Case.Str.rawValue
@@ -97,7 +97,7 @@ public enum Serialized: CustomStringConvertible {
     }
     
     public init(typeName:String, data:[String:Serialized]) {
-        self = Serialized.Struct(typeName: typeName, data: Serialized.Dict(data))
+        self = Serialized.CustomType(typeName: typeName, data: Serialized.Dict(data))
     }
     
     public init(fromArray:[Serializable]) {
@@ -108,8 +108,6 @@ public enum Serialized: CustomStringConvertible {
         let data = (serializedString as NSString).dataUsingEncoding(NSASCIIStringEncoding)!
         do {
             let json = try NSJSONSerialization.JSONObjectWithData(data, options: [])
-            //log("\n\n\n\n\n\n=====-=-=-=-=-=-=\n\n\n\n")
-            //log("\(json)")
             self = Unwrapper.unwrap(json)
         } catch {
             return nil
@@ -163,10 +161,10 @@ private class Unwrapper {
         return Serialized.Dict(rawDictionary(dictionary))
     }
     
-    private class func unwrapStruct(value:NSDictionary) -> Serialized {
+    private class func unwrapCustomType(value:NSDictionary) -> Serialized {
         if let typeName = value[SSKeys.TypeName.rawValue] as? String {
             if let data = value[SSKeys.Data.rawValue] as? NSDictionary {
-                return Serialized.Struct(typeName: typeName, data: Unwrapper.unwrapDictionary(data))
+                return Serialized.CustomType(typeName: typeName, data: Unwrapper.unwrapDictionary(data))
             }
         }
         return Serialized.Str("")
@@ -175,8 +173,8 @@ private class Unwrapper {
 
     private class func unwrapCase(type:Serialized.Case, value:AnyObject) -> Serialized {
         switch type {
-        case .Struct:
-            return Unwrapper.unwrapStruct(value as! NSDictionary)
+        case .CustomType:
+            return Unwrapper.unwrapCustomType(value as! NSDictionary)
         default:
             return Unwrapper.unwrap(value)
         }
@@ -237,19 +235,11 @@ extension Serialized {
             return ((int as! Int), Int.self)
         case .FloatingPoint(let float):
             return (float as! Float, Float.self)
-        case .Struct(let typeName, let data):
-            //log("desrialize struct")
+        case .CustomType(let typeName, let data):
             let names = SuperSerial.serializableTypes.map({ $0.ss_typeName })
             if let index = names.indexOf("\(typeName).Type") {
-                //log("found name")
                 let type:Serializable.Type = SuperSerial.serializableTypes[index]
-//                var newData = [String:Serializable]()
-                //log("initing with data:\(data) --- : \(type.init(fromSerialized: data))")
-                //log("=================")
                 let initd = type.init(fromSerialized: data)
-                //log("=================")
-
-                //log("initd: \(initd)")
                 return (initd!, type)
             }
             return nil
@@ -270,24 +260,18 @@ public protocol AutoSerializable:Serializable {
 
 public extension AutoSerializable {
     public init?(fromSerialized: Serialized) {
-        //log("init auto fromSerialized")
-//        let de = fromSerialized.deserialize()
-//
         switch fromSerialized {
         case .Dict(let dict):
-            //log("\(dict)")
             var newData = [String:Serializable]()
             for (key,value) in dict {
                 if let d = value.deserialize() {
                 newData[key] = d.0 as? Serializable
                 }
             }
-            //log("inside fromSerialized: \(newData)")
             self.init(withValuesForKeys: newData)
             break
         default: return nil
         }
-        //log("after swift in fromSerialized: \(self)")
     }
 }
 
@@ -295,7 +279,6 @@ public extension AutoSerializable {
 public extension Serializable {
     static var ss_typeName:String {
         let ref = Mirror(reflecting: self)
-        //log("ss_typeName: \(ref.subjectType)")
         return "\(ref.subjectType)"
     }
 
@@ -322,5 +305,23 @@ public extension Serializable {
             }
         }
         return Serialized.Str("")
+    }
+}
+
+public protocol SerializableObject: NSObjectProtocol, AutoSerializable {
+    static var serializableKeys:[String] { get }
+    
+    func valueForKey(key:String) -> AnyObject
+    func setValue(value: AnyObject?, forKey key: String)
+}
+
+public extension SerializableObject {
+    public func ss_serialize() -> Serialized {
+        var dict = [String:Serialized]()
+        
+        for key in self.dynamicType.serializableKeys {
+            dict[key] = (self.valueForKey(key) as? Serializable)?.ss_serialize()
+        }
+        return Serialized.CustomType(typeName: self.dynamicType.ss_typeName, data: Serialized.Dict(dict))
     }
 }
