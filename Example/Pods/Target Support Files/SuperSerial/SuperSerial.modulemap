@@ -1,0 +1,6 @@
+framework module SuperSerial {
+  umbrella header "SuperSerial-umbrella.h"
+
+  export *
+  module * { export * }
+}
