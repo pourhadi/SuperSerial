@@ -11,8 +11,9 @@
 # script:
 # - set -o pipefail && xcodebuild test -workspace Example/SuperSerial.xcworkspace -scheme SuperSerial-Example -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO | xcpretty
 # - pod lib lint
+osx_image: xcode7.2
 
-language: objective-c
+language: swift
 script:
   - xctool -workspace Example/SuperSerial.xcworkspace -scheme SuperSerial-Example -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
 #  - xctool test -workspace Example/SuperSerial.xcworkspace -scheme SuperSerial_Tests -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
