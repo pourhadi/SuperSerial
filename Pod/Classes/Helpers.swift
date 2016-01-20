@@ -9,7 +9,6 @@
 import Foundation
 
 extension UIColor {
-    
     public func hexString() -> String {
         var r: CGFloat = 0
         var g: CGFloat = 0
