@@ -56,7 +56,7 @@ extension CGPoint: AutoSerializable {
 public protocol SerializableInt:IntegerType, Serializable, Deserializable {}
 extension SerializableInt {
     public func ss_serialize() -> Serialized {
-        return Serialized.Integer(self)
+        return Serialized.Integer(self as! Int)
     }
     
     public init?(fromSerialized:Serialized) {
@@ -74,7 +74,7 @@ extension UInt:SerializableInt {}
 public protocol SerializableFloat:FloatingPointType, Serializable, Deserializable {}
 extension SerializableFloat {
     public func ss_serialize() -> Serialized {
-        return Serialized.FloatingPoint(self)
+        return Serialized.FloatingPoint(self as! Float)
     }
     
     public init?(fromSerialized:Serialized) {

@@ -57,8 +57,8 @@ public enum Serialized: CustomStringConvertible {
     indirect case Dict([String:Serialized])
     indirect case Array([Serialized])
     case Str(String)
-    case Integer(IntegerType)
-    case FloatingPoint(FloatingPointType)
+    case Integer(Int)
+    case FloatingPoint(Float)
     
     public func toString() -> String {
         var string = "{\"ss_case\": \"\(self.caseAsString())\", \"ss_value\": "
