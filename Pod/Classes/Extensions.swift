@@ -8,10 +8,7 @@
 
 import Foundation
 
-/**
- Adds basic serialization to String
- */
-extension String:Serializable {
+extension String: Serializable {
     public init?(fromSerialized: Serialized) {
         switch fromSerialized {
         case .Str(let string):
@@ -41,7 +38,7 @@ extension CollectionType where Generator.Element == Serialized {
 extension Dictionary:Deserializable {}
 extension Array:Deserializable {}
 
-extension CGPoint:AutoSerializable {
+extension CGPoint: AutoSerializable {
     public init!(withValuesForKeys: [String : Serializable]) {
         var x:Float = 0.0
         var y:Float = 0.0
@@ -71,6 +68,9 @@ extension SerializableInt {
     }
 }
 
+extension Int: SerializableInt {}
+extension UInt:SerializableInt {}
+
 public protocol SerializableFloat:FloatingPointType, Serializable, Deserializable {}
 extension SerializableFloat {
     public func ss_serialize() -> Serialized {
@@ -86,9 +86,51 @@ extension SerializableFloat {
     }
 }
 
-extension Int: SerializableInt {}
-extension UInt:SerializableInt {}
-
 extension Float:SerializableFloat {}
 extension Double:SerializableFloat {}
 extension CGFloat:SerializableFloat {}
+
+
+///Serializable UIColor subclass
+public final class SSColor : UIColor, SerializableObject {
+    public func ss_serialize() -> Serialized {
+        return Serialized.CustomType(typeName: "SSColor", data: Serialized.Str(self.hexString()))
+    }
+    
+    public convenience init?(fromSerialized:Serialized) {
+        switch fromSerialized {
+        case .Str(let string):
+            self.init(rgba: string)
+            break
+        default: return nil
+        }
+    }
+    
+    public override init() {
+        super.init()
+    }
+    
+    required public init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    required convenience public init(colorLiteralRed red: Float, green: Float, blue: Float, alpha: Float) {
+        fatalError("init(colorLiteralRed:green:blue:alpha:) has not been implemented")
+    }
+    
+    init?(rgba:String) {
+        guard let hexString: String = rgba.substringFromIndex(rgba.startIndex.advancedBy(1)),
+            var   hexValue:  UInt32 = 0
+            where NSScanner(string: hexString).scanHexInt(&hexValue) else {
+                super.init()
+                return
+        }
+        let hex8 = hexValue
+        let divisor = CGFloat(255)
+        let red     = CGFloat((hex8 & 0xFF000000) >> 24) / divisor
+        let green   = CGFloat((hex8 & 0x00FF0000) >> 16) / divisor
+        let blue    = CGFloat((hex8 & 0x0000FF00) >>  8) / divisor
+        let alpha   = CGFloat( hex8 & 0x000000FF       ) / divisor
+        super.init(red: red, green: green, blue: blue, alpha: alpha)
+    }
+}

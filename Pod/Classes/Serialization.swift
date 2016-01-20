@@ -8,6 +8,27 @@
 
 import Foundation
 
+public protocol Serializable: Deserializable {
+    func ss_serialize() -> Serialized
+    init?(fromSerialized:Serialized)
+}
+
+public protocol AutoSerializable:Serializable {
+    init?(withValuesForKeys:[String:Serializable])
+}
+
+public protocol SerializableObject: class, Serializable {
+    init()
+}
+
+public protocol SerializableKVCObject:SerializableObject, AutoSerializable {
+    static var serializableKeys:[String] { get }
+    
+    func valueForKey(key:String) -> AnyObject
+    func setValue(value: AnyObject?, forKey key: String)
+}
+
+
 private func log(logMessage: String, functionName: String = __FUNCTION__) {
     print("\(functionName): \(logMessage)")
 }
@@ -27,7 +48,7 @@ public class SuperSerial {
     
     private var customSerializableTypes = [Serializable.Type]()
     private var internalSerializableTypes:[Serializable.Type] {
-        return [Int.self, UInt.self, Float.self, String.self, CGPoint.self]
+        return [Int.self, UInt.self, Float.self, String.self, CGPoint.self, SSColor.self]
     }
 }
 
@@ -241,6 +262,7 @@ extension Serialized {
                 let type:Serializable.Type = SuperSerial.serializableTypes[index]
                 let initd = type.init(fromSerialized: data)
                 return (initd!, type)
+                
             }
             return nil
         }
@@ -248,15 +270,6 @@ extension Serialized {
 }
 
 public protocol Deserializable {}
-
-public protocol Serializable: Deserializable {
-    func ss_serialize() -> Serialized
-    init?(fromSerialized:Serialized)
-}
-
-public protocol AutoSerializable:Serializable {
-    init?(withValuesForKeys:[String:Serializable])
-}
 
 public extension AutoSerializable {
     public init?(fromSerialized: Serialized) {
@@ -271,6 +284,17 @@ public extension AutoSerializable {
             self.init(withValuesForKeys: newData)
             break
         default: return nil
+        }
+    }
+}
+
+public extension SerializableKVCObject {
+    public init?(withValuesForKeys: [String : Serializable]) {
+        self.init()
+        for (key, value) in withValuesForKeys {
+            if self.dynamicType.serializableKeys.contains(key) {
+                self.setValue(value as? AnyObject, forKey: key)
+            }
         }
     }
 }
@@ -308,14 +332,7 @@ public extension Serializable {
     }
 }
 
-public protocol SerializableObject: NSObjectProtocol, AutoSerializable {
-    static var serializableKeys:[String] { get }
-    
-    func valueForKey(key:String) -> AnyObject
-    func setValue(value: AnyObject?, forKey key: String)
-}
-
-public extension SerializableObject {
+public extension SerializableKVCObject {
     public func ss_serialize() -> Serialized {
         var dict = [String:Serialized]()
         
