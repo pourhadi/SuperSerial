@@ -264,9 +264,9 @@ extension Serialized {
         case .Str(let string):
             return string
         case .Integer(let int):
-            return (int as! Int)
+            return (int)
         case .FloatingPoint(let float):
-            return float as! Float
+            return float
         case .CustomType(let typeName, let data):
             let names = SuperSerial.serializableTypes.map({ $0.ss_typeName })
             if let index = names.indexOf("\(typeName).Type") {
