@@ -7,7 +7,7 @@
 
 ## Usage
 
-SuperSerial uses Mirroring in Swift to automatically infer a Struct's stored variables, allowing for hassle-free out-of-the-box JSON serialization. Conforming that Struct to AutoSerializable allows for easy deserialization as well.
+SuperSerial uses Swift's Mirror to automatically infer a struct's stored variables, allowing for hassle-free out-of-the-box JSON serialization. Conforming that struct to AutoSerializable allows for easy deserialization as well.
 
 Also supports custom serialization for structs and object types.
 
