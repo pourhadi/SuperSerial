@@ -1,5 +1,5 @@
 PODS:
-  - SuperSerial (0.1.0)
+  - SuperSerial (0.1.4)
 
 DEPENDENCIES:
   - SuperSerial (from `../`)
@@ -9,6 +9,6 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  SuperSerial: 1b401af1043fff4096c8bf4903cb496cb1d5a241
+  SuperSerial: c8c72d80c800b83faae1606894e8a3105d837123
 
 COCOAPODS: 0.39.0

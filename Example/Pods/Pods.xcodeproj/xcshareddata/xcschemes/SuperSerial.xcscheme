@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'F19D995884A77E9FFC3E2D36'
+               BlueprintIdentifier = '181EAD66227667BC95341818'
                BlueprintName = 'SuperSerial'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'SuperSerial.framework'>

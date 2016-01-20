@@ -8,18 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		1B17F43980DDD1E960DEAEDF7B3AF7E7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
+		2258E2C5C2B67AA88AD8201DA674660B /* SuperSerial-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D886F7F7F1E8B1538CB97894094D5BC /* SuperSerial-dummy.m */; };
 		2A0F63A4DDC3911F201B438156267230 /* Pods-SuperSerial_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 1E218B24147E7FE5447C205AC31002CB /* Pods-SuperSerial_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2FE7FAE9462DB2997BBCEC68CF84C217 /* SuperSerial-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 7D886F7F7F1E8B1538CB97894094D5BC /* SuperSerial-dummy.m */; };
-		44193EBA1C4E15CD00EA7C20 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44193EB81C4E15CD00EA7C20 /* Extensions.swift */; };
-		44193EBB1C4E15CD00EA7C20 /* Serialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44193EB91C4E15CD00EA7C20 /* Serialization.swift */; };
-		44193EBC1C4E180A00EA7C20 /* Serialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44193EB91C4E15CD00EA7C20 /* Serialization.swift */; };
-		44193EBD1C4E180D00EA7C20 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44193EB81C4E15CD00EA7C20 /* Extensions.swift */; };
-		44193EBE1C4E182500EA7C20 /* Extensions.swift in Headers */ = {isa = PBXBuildFile; fileRef = 44193EB81C4E15CD00EA7C20 /* Extensions.swift */; settings = {ATTRIBUTES = (Public, ); }; };
-		44193EBF1C4E182500EA7C20 /* Serialization.swift in Headers */ = {isa = PBXBuildFile; fileRef = 44193EB91C4E15CD00EA7C20 /* Serialization.swift */; settings = {ATTRIBUTES = (Public, ); }; };
 		468DDFC426C8C7BCC406A30EBA4C1A47 /* SuperSerial-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E39C40EFD3044AFECBFA0830B2861DAC /* SuperSerial-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5110589B151EE92E4DCD10B6E5EFAFC0 /* Serialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38C6C8C9BFC12BA8820F8D682BA3197A /* Serialization.swift */; };
 		7A3AB9D0E2A4ECEEC8DB2077FDD05A28 /* SuperSerial.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9A82DE402C528B910F87144ABC337B72 /* SuperSerial.bundle */; };
 		9B6A6A5E317083D224B8862A22E6C5B3 /* Pods-SuperSerial_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 791D4AA6AC687F05AAD577B802382635 /* Pods-SuperSerial_Tests-dummy.m */; };
+		A695D55F67894466DC07CACF5114520B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2AAE21015078CCC905F59D8C86AD73 /* Extensions.swift */; };
 		D81CF0803D0EADA5293890B30B8E01AC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
+		F7385FC51365A08418997C5B4014E92D /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = E00173B11D1D673417D24C18A9982244 /* Helpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,9 +42,8 @@
 		1E218B24147E7FE5447C205AC31002CB /* Pods-SuperSerial_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SuperSerial_Tests-umbrella.h"; sourceTree = "<group>"; };
 		24941EC91CE5F5AD1D2E78EEB4221A3B /* Pods-SuperSerial_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SuperSerial_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		37F6993864FEAE9F98B756490F44F522 /* Pods-SuperSerial_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = "Pods-SuperSerial_Tests.modulemap"; sourceTree = "<group>"; };
+		38C6C8C9BFC12BA8820F8D682BA3197A /* Serialization.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Serialization.swift; sourceTree = "<group>"; };
 		3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		44193EB81C4E15CD00EA7C20 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		44193EB91C4E15CD00EA7C20 /* Serialization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serialization.swift; sourceTree = "<group>"; };
 		4D57640FF54CD77768649FA4D7532895 /* Pods-SuperSerial_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SuperSerial_Tests-resources.sh"; sourceTree = "<group>"; };
 		5CE8B97E0E437BA0C815685FB713925B /* SuperSerial.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SuperSerial.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		666DB3868F74A9D2099B247CAC4B9534 /* SuperSerial.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SuperSerial.xcconfig; sourceTree = "<group>"; };
@@ -55,12 +51,14 @@
 		7D886F7F7F1E8B1538CB97894094D5BC /* SuperSerial-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SuperSerial-dummy.m"; sourceTree = "<group>"; };
 		888719CF82DC8640256E22D72C0B7FE9 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8E1E1FC79EE6B9795688E8AD05EF1EC9 /* Pods-SuperSerial_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SuperSerial_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
+		9A2AAE21015078CCC905F59D8C86AD73 /* Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		9A82DE402C528B910F87144ABC337B72 /* SuperSerial.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SuperSerial.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		A15BA4D14BDABC31E9BABF27A1BD99D5 /* SuperSerial-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SuperSerial-prefix.pch"; sourceTree = "<group>"; };
 		A287F1AE82BD6A2C2EE255C0A90BA308 /* Pods-SuperSerial_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SuperSerial_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		A933EC9CA85A7B889B259AC499BF9F74 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B39FEDA137E05F3941CF7CCBC65462F6 /* Pods-SuperSerial_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SuperSerial_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		E00173B11D1D673417D24C18A9982244 /* Helpers.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		E39C40EFD3044AFECBFA0830B2861DAC /* SuperSerial-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SuperSerial-umbrella.h"; sourceTree = "<group>"; };
 		E8B9963A641008F8C3B68A8556397742 /* Pods-SuperSerial_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SuperSerial_Tests-frameworks.sh"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -105,7 +103,7 @@
 		54A76E5A222AF654C20E37690A6BB014 /* SuperSerial */ = {
 			isa = PBXGroup;
 			children = (
-				F6DD1DC616F1C0C7E8308A2879461BB1 /* Pod */,
+				8C296E95D5C2FDAC44FF77DA8310D60D /* Pod */,
 				7F64F04A2C6481CC3D8F346BD6FB3EE9 /* Support Files */,
 			);
 			name = SuperSerial;
@@ -155,6 +153,14 @@
 			path = "Example/Pods/Target Support Files/SuperSerial";
 			sourceTree = "<group>";
 		};
+		8C296E95D5C2FDAC44FF77DA8310D60D /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				F3F249B27175D313FADAA5EE7D6AA183 /* Classes */,
+			);
+			path = Pod;
+			sourceTree = "<group>";
+		};
 		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -171,21 +177,22 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		CB39414A9B5085954C2CCC85F921EA69 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				44193EB81C4E15CD00EA7C20 /* Extensions.swift */,
-				44193EB91C4E15CD00EA7C20 /* Serialization.swift */,
-			);
-			path = Classes;
-			sourceTree = "<group>";
-		};
 		D0280DC15569E95DA53CBDFD698B69DB /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
 				54A76E5A222AF654C20E37690A6BB014 /* SuperSerial */,
 			);
 			name = "Development Pods";
+			sourceTree = "<group>";
+		};
+		F3F249B27175D313FADAA5EE7D6AA183 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				9A2AAE21015078CCC905F59D8C86AD73 /* Extensions.swift */,
+				E00173B11D1D673417D24C18A9982244 /* Helpers.swift */,
+				38C6C8C9BFC12BA8820F8D682BA3197A /* Serialization.swift */,
+			);
+			path = Classes;
 			sourceTree = "<group>";
 		};
 		F52EBA2C5981235C6614A2E0D7D68A77 /* Targets Support Files */ = {
@@ -196,14 +203,6 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		F6DD1DC616F1C0C7E8308A2879461BB1 /* Pod */ = {
-			isa = PBXGroup;
-			children = (
-				CB39414A9B5085954C2CCC85F921EA69 /* Classes */,
-			);
-			path = Pod;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -212,8 +211,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				468DDFC426C8C7BCC406A30EBA4C1A47 /* SuperSerial-umbrella.h in Headers */,
-				44193EBE1C4E182500EA7C20 /* Extensions.swift in Headers */,
-				44193EBF1C4E182500EA7C20 /* Serialization.swift in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,7 +229,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 67BD4CA5C30CC1D4B1A02F8529C2483F /* Build configuration list for PBXNativeTarget "SuperSerial" */;
 			buildPhases = (
-				B65B4C8CF90919F980407823F3727835 /* Sources */,
+				0DAC5D00C9A6B1B5C7FA6990E75CBA71 /* Sources */,
 				98775119CF51EE0005AD23A9A7560B71 /* Frameworks */,
 				B7DA6B6E80127D1D196D9D1FD52AD88C /* Resources */,
 				ECADFD6117A76F479B4AC6ABC8EADD98 /* Headers */,
@@ -288,7 +285,7 @@
 		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0720;
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0700;
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
@@ -329,13 +326,22 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		0DAC5D00C9A6B1B5C7FA6990E75CBA71 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A695D55F67894466DC07CACF5114520B /* Extensions.swift in Sources */,
+				F7385FC51365A08418997C5B4014E92D /* Helpers.swift in Sources */,
+				5110589B151EE92E4DCD10B6E5EFAFC0 /* Serialization.swift in Sources */,
+				2258E2C5C2B67AA88AD8201DA674660B /* SuperSerial-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		33EEABC081D834C5ED397A01A32BE7BE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				9B6A6A5E317083D224B8862A22E6C5B3 /* Pods-SuperSerial_Tests-dummy.m in Sources */,
-				44193EBB1C4E15CD00EA7C20 /* Serialization.swift in Sources */,
-				44193EBA1C4E15CD00EA7C20 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,16 +349,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B65B4C8CF90919F980407823F3727835 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				44193EBC1C4E180A00EA7C20 /* Serialization.swift in Sources */,
-				44193EBD1C4E180D00EA7C20 /* Extensions.swift in Sources */,
-				2FE7FAE9462DB2997BBCEC68CF84C217 /* SuperSerial-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -530,7 +526,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 24941EC91CE5F5AD1D2E78EEB4221A3B /* Pods-SuperSerial_Tests.debug.xcconfig */;
 			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -562,7 +557,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A287F1AE82BD6A2C2EE255C0A90BA308 /* Pods-SuperSerial_Tests.release.xcconfig */;
 			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;

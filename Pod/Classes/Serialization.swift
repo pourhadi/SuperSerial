@@ -235,33 +235,33 @@ private class Unwrapper {
 
 
 extension Serialized {
-    public func deserialize() -> (value:Deserializable, type:Deserializable.Type)? {
+    public func deserialize() -> Deserializable? {
         switch self {
         case .Dict(let dict):
             var newDict = [String:Serializable]()
             for (key, value) in dict {
-                let x:Serializable = value.deserialize()!.0 as! Serializable
+                let x:Serializable = value.deserialize() as! Serializable
                 newDict[key] = x
             }
-            return (newDict, newDict.dynamicType)
+            return newDict
         case .Array(let array):
             var newArray = [Serializable]()
             for obj in array {
-                newArray.append(obj.deserialize()!.0 as! Serializable)
+                newArray.append(obj.deserialize() as! Serializable)
             }
-            return (newArray, newArray.dynamicType)
+            return newArray
         case .Str(let string):
-            return (string, String.self)
+            return string
         case .Integer(let int):
-            return ((int as! Int), Int.self)
+            return (int as! Int)
         case .FloatingPoint(let float):
-            return (float as! Float, Float.self)
+            return float as! Float
         case .CustomType(let typeName, let data):
             let names = SuperSerial.serializableTypes.map({ $0.ss_typeName })
             if let index = names.indexOf("\(typeName).Type") {
                 let type:Serializable.Type = SuperSerial.serializableTypes[index]
                 let initd = type.init(fromSerialized: data)
-                return (initd!, type)
+                return initd
                 
             }
             return nil
@@ -278,7 +278,7 @@ public extension AutoSerializable {
             var newData = [String:Serializable]()
             for (key,value) in dict {
                 if let d = value.deserialize() {
-                newData[key] = d.0 as? Serializable
+                newData[key] = d as? Serializable
                 }
             }
             self.init(withValuesForKeys: newData)

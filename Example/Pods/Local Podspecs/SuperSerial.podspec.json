@@ -1,16 +1,16 @@
 {
   "name": "SuperSerial",
-  "version": "0.1.0",
-  "summary": "A short description of SuperSerial.",
-  "description": "",
-  "homepage": "https://github.com/<GITHUB_USERNAME>/SuperSerial",
+  "version": "0.1.4",
+  "summary": "Serialization for Swift object AND value types, with automatic stored-property inferrance.",
+  "description": "Serialization for Swift value types (structs in particular) and objects, with automatic stored-property inferrance.",
+  "homepage": "https://github.com/pourhadi/SuperSerial",
   "license": "MIT",
   "authors": {
-    "Daniel Pourhadi": "dan.p@akta.com"
+    "Daniel Pourhadi": "dan@pourhadi.com"
   },
   "source": {
-    "git": "https://github.com/<GITHUB_USERNAME>/SuperSerial.git",
-    "tag": "0.1.0"
+    "git": "https://github.com/pourhadi/SuperSerial.git",
+    "tag": "0.1.4"
   },
   "platforms": {
     "ios": "8.0"
