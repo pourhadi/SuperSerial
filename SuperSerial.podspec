@@ -1,10 +1,10 @@
 Pod::Spec.new do |s|
   s.name             = "SuperSerial"
-  s.version          = "0.1.4"
-  s.summary          = "Serialization for Swift object AND value types, with automatic stored-property inferrance."
+  s.version          = "0.1.5"
+  s.summary          = "JSON serialization/deserialization for Swift object & value types, with automatic stored-property inferrance in structs."
 
 
-s.description      = "Serialization for Swift value types (structs in particular) and objects, with automatic stored-property inferrance."
+s.description      = "JSON serialization/deserialization for Swift value types (structs in particular) and objects, with automatic stored-property inferrance using Swift Mirror."
 
   s.homepage         = "https://github.com/pourhadi/SuperSerial"
   s.license          = 'MIT'
