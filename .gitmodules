@@ -1,0 +1,3 @@
+[submodule "Documentation"]
+	path = Documentation
+	url = https://github.com/pourhadi/SuperSerialDocumentation.git
