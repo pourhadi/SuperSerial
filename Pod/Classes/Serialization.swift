@@ -13,6 +13,11 @@ public protocol Serializable: Deserializable {
     init?(fromSerialized:Serialized)
 }
 
+/**
+ When a struct that conforms to AutoSerializable is serialized, its stored properties (those with types that conform to Serializable) are automatically included in the serialization.
+ 
+ -ss_serialize() and -init?(fromSerialized:) are implemented in an extension; only -init?(withValuesForKeys:) needs to be implemented by the conforming struct.
+ */
 public protocol AutoSerializable:Serializable {
     init?(withValuesForKeys:[String:Serializable])
 }
@@ -21,6 +26,11 @@ public protocol SerializableObject: class, Serializable {
     init()
 }
 
+/** 
+ Objects that inherit from NSObject can conform to SerializableKVCObject for easy serialization of its Serializable-conforming properties listed in -serializableKeys.
+ 
+ -valueForKey: and -setValue:forKey: do not need to be manually implemented, as they are implemented by NSObject.
+ */
 public protocol SerializableKVCObject:SerializableObject, AutoSerializable {
     static var serializableKeys:[String] { get }
     
@@ -35,6 +45,7 @@ private func log(logMessage: String, functionName: String = __FUNCTION__) {
 
 private let _ss = SuperSerial()
 public class SuperSerial {
+    /// Custom types that can be deserialized must be specified here prior to deserialization.
     public class var serializableTypes:[Serializable.Type] {
         get {
             var all = _ss.customSerializableTypes
