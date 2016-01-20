@@ -13,7 +13,7 @@ s.description      = "JSON serialization/deserialization for Swift value types (
 
   s.platform     = :ios, '8.0'
   s.requires_arc = true
-
+  s.documentation_url = "http://pourhadi.github.io/SuperSerialDocumentation/"
   s.source_files = 'Pod/Classes/**/*'
   s.resource_bundles = {
     'SuperSerial' => ['Pod/Assets/*.png']
