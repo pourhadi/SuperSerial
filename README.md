@@ -1,6 +1,6 @@
 # SuperSerial
 
-[![CI Status](http://img.shields.io/travis/Daniel Pourhadi/SuperSerial.svg?style=flat)](https://travis-ci.org/Daniel Pourhadi/SuperSerial)
+[![CI Status](http://img.shields.io/travis/pourhadi/SuperSerial.svg?style=flat)](https://travis-ci.org/pourhadi/SuperSerial)
 [![Version](https://img.shields.io/cocoapods/v/SuperSerial.svg?style=flat)](http://cocoapods.org/pods/SuperSerial)
 [![License](https://img.shields.io/cocoapods/l/SuperSerial.svg?style=flat)](http://cocoapods.org/pods/SuperSerial)
 [![Platform](https://img.shields.io/cocoapods/p/SuperSerial.svg?style=flat)](http://cocoapods.org/pods/SuperSerial)
