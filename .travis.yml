@@ -2,12 +2,17 @@
 # * http://www.objc.io/issue-6/travis-ci.html
 # * https://github.com/supermarin/xcpretty#usage
 
+# language: objective-c
+# # cache: cocoapods
+# # podfile: Example/Podfile
+# # before_install:
+# # - gem install cocoapods # Since Travis is not always on latest version
+# # - pod install --project-directory=Example
+# script:
+# - set -o pipefail && xcodebuild test -workspace Example/SuperSerial.xcworkspace -scheme SuperSerial-Example -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO | xcpretty
+# - pod lib lint
+
 language: objective-c
-# cache: cocoapods
-# podfile: Example/Podfile
-# before_install:
-# - gem install cocoapods # Since Travis is not always on latest version
-# - pod install --project-directory=Example
 script:
-- set -o pipefail && xcodebuild test -workspace Example/SuperSerial.xcworkspace -scheme SuperSerial-Example -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO | xcpretty
-- pod lib lint
+  - xctool -workspace Example/SuperSerial.xcworkspace -scheme SuperSerial-Example -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
+  - xctool test -workspace Example/SuperSerial.xcworkspace -scheme SuperSerial_Tests -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
