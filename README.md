@@ -14,31 +14,36 @@ Also supports custom serialization for structs and object types.
 See header comments for more details.
 
 
-
-    struct Person {
-        let name:String
-        let age:Int
-    }
+```swift
+struct Person {
+    let name:String
+    let age:Int
+}
     
-    extension Person:AutoSerializable {
-        init?(withValuesForKeys: [String : Serializable]) {
-            self.name = withValuesForKeys["name"] as! String
-            self.age = withValuesForKeys["age"] as! Int
-        }
+extension Person:AutoSerializable {
+    init?(withValuesForKeys: [String : Serializable]) {
+        self.name = withValuesForKeys["name"] as! String
+        self.age = withValuesForKeys["age"] as! Int
     }
+}
     
-    let people:[Serializable] = [Person(name: "Bob", age: 30), Person(name: "Lisa", age: 32), Person(name: "Mark", age: 29)]
+let people:[Serializable] = [Person(name: "Bob", age: 30), Person(name: "Lisa", age: 32), Person(name: "Mark", age: 29)]
+```
 
 Specify the types that can be serialized and deserialized:
 
-    SuperSerial.serializableTypes = [Person.self]
+```swift
+SuperSerial.serializableTypes = [Person.self]
+```
     
 Serialize and deserialize:
 
-    let serialized = Serialized(fromArray: people)
-    let jsonString = serialized.toString()
-    let fromString = Serialized(serializedString: jsonString)
-    let deserialized = fromString?.deserialize()
+```swift
+let serialized = Serialized(fromArray: people)
+let jsonString = serialized.toString()
+let fromString = Serialized(serializedString: jsonString)
+let deserialized = fromString?.deserialize()
+```
 
 ## Requirements
 
