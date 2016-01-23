@@ -9,7 +9,14 @@
 import Foundation
 
 public protocol Serializable: Deserializable {
+/**
+     Any serializable type must adopt this method. Some child protocols, like AutoSerializable and SerializableKVCObject, implement this method for you in extensions.
+     
+     This method must serialize all of this instance's serializable children (i.e., properties) and return a Serialized enum value wrapping the data.
+*/
     func ss_serialize() -> Serialized
+    
+
     init?(fromSerialized:Serialized)
 }
 
@@ -59,7 +66,7 @@ public class SuperSerial {
     
     private var customSerializableTypes = [Serializable.Type]()
     private var internalSerializableTypes:[Serializable.Type] {
-        return [Int.self, UInt.self, Float.self, String.self, CGPoint.self, SSColor.self]
+        return [Int.self, UInt.self, Float.self, String.self, CGPoint.self, SSColor.self, CGSize.self]
     }
 }
 
@@ -327,6 +334,9 @@ public extension Serializable {
                         switch tuple.value {
                         case let val as Serializable:
                             dict[label] = val.ss_serialize()
+                            break
+                        case let val as [Serializable]:
+                            dict[label] = Serialized(fromArray: val)
                             break
                         default:
                             if let unwrapped = Mirror(reflecting: tuple.value).descendant("Some") as? Serializable {

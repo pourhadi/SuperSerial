@@ -53,6 +53,27 @@ extension CGPoint: AutoSerializable {
     }
 }
 
+extension CGSize: AutoSerializable {
+    public init!(withValuesForKeys:[String: Serializable]) {
+        self.width = withValuesForKeys["width"] as! CGFloat
+        self.height = withValuesForKeys["height"] as! CGFloat
+    }
+}
+
+public protocol SerializableRawRepresentable: RawRepresentable, Serializable, Deserializable {}
+extension SerializableRawRepresentable where RawValue:Serializable  {
+    public func ss_serialize() -> Serialized {
+        return self.rawValue.ss_serialize()
+    }
+    
+    public init?(fromSerialized: Serialized) {
+        
+        self.init(rawValue:fromSerialized.deserialize() as! RawValue)
+    }
+}
+
+extension UIRectCorner:SerializableRawRepresentable {}
+
 public protocol SerializableInt:IntegerType, Serializable, Deserializable {}
 extension SerializableInt {
     public func ss_serialize() -> Serialized {
