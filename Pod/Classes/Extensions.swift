@@ -9,6 +9,14 @@
 import Foundation
 
 extension String: Serializable {
+    public static func ss_fromSerialized(serialized:Serialized) -> String? {
+        switch serialized {
+        case .Str(let string):
+            return string
+        default: return nil
+        }
+    }
+    
     public init?(fromSerialized: Serialized) {
         switch fromSerialized {
         case .Str(let string):
@@ -39,6 +47,8 @@ extension Dictionary:Deserializable {}
 extension Array:Deserializable {}
 
 extension CGPoint: AutoSerializable {
+
+    
     public init!(withValuesForKeys: [String : Serializable]) {
         var x:Float = 0.0
         var y:Float = 0.0
@@ -66,8 +76,11 @@ extension SerializableRawRepresentable where RawValue:Serializable  {
         return self.rawValue.ss_serialize()
     }
     
+    public static func ss_fromSerialized(serialized:Serialized) -> Self? {
+        return self.init(rawValue:serialized.deserialize() as! RawValue)
+    }
+
     public init?(fromSerialized: Serialized) {
-        
         self.init(rawValue:fromSerialized.deserialize() as! RawValue)
     }
 }
@@ -78,6 +91,14 @@ public protocol SerializableInt:IntegerType, Serializable, Deserializable {}
 extension SerializableInt {
     public func ss_serialize() -> Serialized {
         return Serialized.Integer(self as! Int)
+    }
+    
+    public static func ss_fromSerialized(serialized:Serialized) -> Self? {
+        switch serialized {
+        case .Integer(let int):
+            return int as! Self
+        default: return nil
+        }
     }
     
     public init?(fromSerialized:Serialized) {
@@ -95,7 +116,27 @@ extension UInt:SerializableInt {}
 public protocol SerializableFloat:FloatingPointType, Serializable, Deserializable {}
 extension SerializableFloat {
     public func ss_serialize() -> Serialized {
-        return Serialized.FloatingPoint(self as! Float)
+        switch self {
+        case let x as Float:
+            return Serialized.FloatingPoint(x)
+        case let x as Double:
+            return Serialized.FloatingPoint(Float(x))
+        case let x as Float32:
+            return Serialized.FloatingPoint(Float(x))
+        case let x as Float64:
+            return Serialized.FloatingPoint(Float(x))
+        case let x as CGFloat:
+            return Serialized.FloatingPoint(Float(x))
+        default: return Serialized.FloatingPoint(0.0)
+        }
+    }
+    
+    public static func ss_fromSerialized(serialized:Serialized) -> Self? {
+        switch serialized {
+        case .FloatingPoint(let float):
+            return float as! Self
+        default: return nil
+        }
     }
     
     public init?(fromSerialized:Serialized) {
@@ -111,40 +152,20 @@ extension Float:SerializableFloat {}
 extension Double:SerializableFloat {}
 extension CGFloat:SerializableFloat {}
 
-
-///Serializable UIColor subclass
-public final class SSColor : UIColor, SerializableObject {
-    public func ss_serialize() -> Serialized {
-        return Serialized.CustomType(typeName: "SSColor", data: Serialized.Str(self.hexString()))
-    }
-    
-    public convenience init?(fromSerialized:Serialized) {
-        switch fromSerialized {
+extension UIColor: Serializable {
+    public static func ss_fromSerialized(serialized: Serialized) -> Self? {
+        switch serialized {
         case .Str(let string):
-            self.init(rgba: string)
-            break
-        default: return nil
+            return self.fromRGBA(string)
+        default : return nil
         }
     }
     
-    public override init() {
-        super.init()
-    }
-    
-    required public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    required convenience public init(colorLiteralRed red: Float, green: Float, blue: Float, alpha: Float) {
-        fatalError("init(colorLiteralRed:green:blue:alpha:) has not been implemented")
-    }
-    
-    init?(rgba:String) {
+    internal static func fromRGBA(rgba:String) -> Self? {
         guard let hexString: String = rgba.substringFromIndex(rgba.startIndex.advancedBy(1)),
             var   hexValue:  UInt32 = 0
             where NSScanner(string: hexString).scanHexInt(&hexValue) else {
-                super.init()
-                return
+                return nil
         }
         let hex8 = hexValue
         let divisor = CGFloat(255)
@@ -152,6 +173,10 @@ public final class SSColor : UIColor, SerializableObject {
         let green   = CGFloat((hex8 & 0x00FF0000) >> 16) / divisor
         let blue    = CGFloat((hex8 & 0x0000FF00) >>  8) / divisor
         let alpha   = CGFloat( hex8 & 0x000000FF       ) / divisor
-        super.init(red: red, green: green, blue: blue, alpha: alpha)
+        return self.init(red: red, green: green, blue: blue, alpha: alpha)
+    }
+    
+    public func ss_serialize() -> Serialized {
+        return Serialized.CustomType(typeName: "UIColor", data: Serialized.Str(self.hexString()))
     }
 }

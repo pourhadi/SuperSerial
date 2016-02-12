@@ -17,7 +17,7 @@ public protocol Serializable: Deserializable {
     func ss_serialize() -> Serialized
     
 
-    init?(fromSerialized:Serialized)
+    static func ss_fromSerialized(serialized:Serialized) -> Self?
 }
 
 /**
@@ -52,8 +52,12 @@ private func log(logMessage: String, functionName: String = __FUNCTION__) {
 
 private let _ss = SuperSerial()
 public class SuperSerial {
+    public class func addSerializableTypes(types:[Serializable.Type]) {
+        _ss.customSerializableTypes.appendContentsOf(types)
+    }
+    
     /// Custom types that can be deserialized must be specified here prior to deserialization.
-    public class var serializableTypes:[Serializable.Type] {
+    internal class var serializableTypes:[Serializable.Type] {
         get {
             var all = _ss.customSerializableTypes
             all.appendContentsOf(_ss.internalSerializableTypes)
@@ -66,7 +70,7 @@ public class SuperSerial {
     
     private var customSerializableTypes = [Serializable.Type]()
     private var internalSerializableTypes:[Serializable.Type] {
-        return [Int.self, UInt.self, Float.self, String.self, CGPoint.self, SSColor.self, CGSize.self]
+        return [Int.self, UInt.self, Float.self, String.self, CGPoint.self, UIColor.self, CGSize.self]
     }
 }
 
@@ -275,12 +279,17 @@ extension Serialized {
         case .FloatingPoint(let float):
             return float
         case .CustomType(let typeName, let data):
+            print("desiarilize \(typeName)")
             let names = SuperSerial.serializableTypes.map({ $0.ss_typeName })
             if let index = names.indexOf("\(typeName).Type") {
                 let type:Serializable.Type = SuperSerial.serializableTypes[index]
-                let initd = type.init(fromSerialized: data)
+                let initd = type.ss_fromSerialized(data)
+                print("desiarilize \(typeName) result: \(initd)")
                 return initd
                 
+            } else {
+                print("desiarilize \(typeName) failed")
+
             }
             return nil
         }
@@ -290,6 +299,26 @@ extension Serialized {
 public protocol Deserializable {}
 
 public extension AutoSerializable {
+    public static func ss_fromSerialized(serialized: Serialized) -> Self? {
+        switch serialized {
+        case .Dict(let dict):
+            var newData = [String:Serializable]()
+            for (key,value) in dict {
+                print("iterate \(key)")
+                if let d = value.deserialize() {
+                    print("able to deserialize \(key)")
+                    newData[key] = d as? Serializable
+                } else {
+                    print("unbale to deserialize \(key)")
+                }
+            }
+            return self.init(withValuesForKeys: newData)
+            break
+        default: return nil
+        }
+        return nil
+    }
+    
     public init?(fromSerialized: Serialized) {
         switch fromSerialized {
         case .Dict(let dict):
@@ -327,7 +356,7 @@ public extension Serializable {
     public func ss_serialize() -> Serialized {
         let ref = Mirror(reflecting: self)
         if let displayStyle = ref.displayStyle {
-            if displayStyle == Mirror.DisplayStyle.Struct && ref.children.count > 0 {
+            if (displayStyle == Mirror.DisplayStyle.Struct || displayStyle == Mirror.DisplayStyle.Class) && ref.children.count > 0 {
                 var dict = [String:Serialized]()
                 ref.children.forEach({ (tuple) -> () in
                     if let label = tuple.label {
